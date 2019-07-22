@@ -1,0 +1,8 @@
+--set-up VScode
+sudo sed -i 's/BIG-REQUESTS/_IG-REQUESTS/' /usr/lib/x86_64-linux-gnu/libxcb.so.1
+
+--set-up sox
+sudo apt-get install sox
+
+--move first 500 files
+mv $(ls | head -n 500) /home/guiuser/deepspeech/Data-sets/test/

@@ -1,0 +1,33 @@
+1- set-up git lfs
+2- clone deepSpeech library git clone --branch v0.5.1 https://github.com/mozilla/DeepSpeech.git  DeepSpeech-lib
+3- install the dependencies - 
+    pip3 install -r requirements.txt
+4- install ds_ctcdecoder
+   pip3 install $(python3 util/taskcluster.py --decoder)  , this installed ds-ctcdecoder==0.5.1
+5. Download data-sets from official site.
+6. convert data to a format that deepSPeech engine can understand -
+    bin/import_cv2.py ../data-sets/german/clips
+
+7. train using below command 
+     python3 DeepSpeech.py --epochs 10 --checkpoint_dir /root/.local/share/deepspeech/checkpoints --export_dir ./test/export/destination --train_files ./test/train.csv --dev_files ./test/dev.csv --test_files ./test/test.csv
+
+   above command will output_graph.pb in the mentioned export dir i.e - ./test/export/destination
+8. Test with newly exported model
+    python3 ./native_client/python/client.py --model ./test/export/destination/output_graph.pb --alphabet ./data/alphabet.txt --lm ./data/lm/lm.binary  --trie ./data/lm/trie  --audio ../Data-sets/german/clips/common_voice_de_17300571.wav 
+
+
+
+Note :
+1. TFLite client: You must use --nouse_seq_length.
+   Non-TFLite client: You must not use --nouse_seq_length
+
+  Else folowing error would occur--
+
+  Error running session: Invalid argument: Tensor input_lengths:0, specified in either feed_devices or fetch_devices was not found in the Graph
+
+
+
+deepspeech --model ./english-model/output_graph.pb --alphabet ./english-model/alphabet.txt --lm ./english-model/lm.binary  --trie ./english-model/trie  --audio ./test_files/english/file3.wav
+
+
+deepspeech --model ./german-model/output_graph.pb --alphabet ./german-model/alphabet.txt --lm ./german-model/lm.binary  --trie ./german-model/trie  --audio ./test_files/german/common_voice_de_17300571.wav 

@@ -1,0 +1,4 @@
+1. ERROR: Failed building wheel for pyaudio
+   solution - sudo apt install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 ffmpeg libav-tools
+2. Not found: Op type not registered 'AudioSpectrogram' in binary running on ip-172-31-20-125.
+  Solution - this indicates that there is problem with deepspeech version mis-match 
