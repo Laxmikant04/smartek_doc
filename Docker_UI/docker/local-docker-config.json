@@ -1,0 +1,10 @@
+{
+  "DB_ROOT_PASS": "voicewebroot",
+  "MYSQLHOST": "db",
+  "S3_CONFIG": {
+    "endpoint": "https://s3.us-west-2.amazonaws.com",
+    "accessKeyId": "AKIAXI6EUJB7QTAONVMN",
+    "secretAccessKey": "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",
+    "s3ForcePathStyle": true
+  }
+}
