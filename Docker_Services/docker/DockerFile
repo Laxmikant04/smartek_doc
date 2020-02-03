@@ -1,0 +1,15 @@
+FROM node:8
+
+# Create app directory
+WORKDIR /code
+
+# Install app dependencies
+COPY package.json /code
+
+RUN npm install
+
+COPY . /code
+
+EXPOSE  7000
+
+CMD [ "npm", "start" ]

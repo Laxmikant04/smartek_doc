@@ -1,0 +1,20 @@
+FROM node:8
+
+# Install cron
+RUN apt-get update && apt-get install -y cron
+
+# Create app directory
+WORKDIR /batchjob
+
+# Install app dependencies
+COPY package.json /batchjob
+
+RUN npm install
+
+COPY . /batchjob
+ 
+RUN chmod +x /batchjob/batchjob.js /batchjob/entrypoint.sh
+
+#RUN chmod +x /batchjob/entrypoint.sh
+
+ENTRYPOINT /batchjob/entrypoint.sh

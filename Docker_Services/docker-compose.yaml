@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  batchjob:
+    build:
+      context : .
+      dockerfile: DockerfileBatch
+    container_name: batchjob
+    restart: unless-stopped
+  server:
+    build:
+      context : .
+      dockerfile: docker/DockerFile
+    container_name: server
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=DEV
+    ports:
+     - 7000:7000   
